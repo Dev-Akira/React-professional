@@ -1,0 +1,87 @@
+enum ChangeRequestStatus {
+    PENDING
+    APPROVED
+    REJECTED
+}
+
+interface ChangeRequest {
+    _id: ID!
+    submitted: String!
+    subdocumentType: String!
+    faculty: ID!
+    status: ChangeRequestStatus!
+    rejectionReason: String
+}
+
+type DegreeChange implements ChangeRequest {
+    _id: ID!
+    submitted: String!
+    subdocumentType: String!
+    faculty: ID!
+    status: ChangeRequestStatus!
+    rejectionReason: String
+
+    title: String!
+    level: DegreeLevel!
+    completionYear: Int!
+}
+
+type ExtensionWorkChange implements ChangeRequest {
+    _id: ID!
+    submitted: String!
+    subdocumentType: String!
+    faculty: ID!
+    status: ChangeRequestStatus!
+    rejectionReason: String
+
+    title: String!
+    roles: [String!]!
+    venue: String!
+}
+
+type InstructionalMaterialChange implements ChangeRequest {
+    _id: ID!
+    submitted: String!
+    subdocumentType: String!
+    faculty: ID!
+    status: ChangeRequestStatus!
+    rejectionReason: String
+
+    title: String!
+    medium: InstructionalMaterialMedium!
+    audience: InstructionalMaterialAudience!
+    usageYear: Int!
+    level: String
+}
+
+type RecognitionChange implements ChangeRequest {
+    _id: ID!
+    submitted: String!
+    subdocumentType: String!
+    faculty: ID!
+    status: ChangeRequestStatus!
+    rejectionReason: String
+
+    title: String!
+    basis: RecognitionBasis!
+    date: MonthYearDate!
+    sponsor: String!
+}
+
+type PresentationChange implements ChangeRequest {
+    _id: ID!
+    submitted: String!
+    subdocumentType: String!
+    faculty: ID!
+    status: ChangeRequestStatus!
+    rejectionReason: String
+
+    title: String!
+    category: PresentationCategory!
+    date: MonthYearDate!
+    sponsor: String!
+    venue: String!
+    conference: String!
+    medium: PresentationMedium!
+    daysDuration: Int!
+}

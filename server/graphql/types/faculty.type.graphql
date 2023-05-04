@@ -1,0 +1,113 @@
+enum PresentationCategory {
+    INSTITUTIONAL
+    REGIONAL
+    NATIONAL
+    INTERNATIONAL
+}
+
+enum PresentationMedium {
+    PAPER
+    POSTER
+    RESEARCH
+}
+
+type Presentation {
+    _id: ID
+    title: String!
+    category: PresentationCategory!
+    date: MonthYearDate!
+    sponsor: String!
+    venue: String!
+    conference: String!
+    medium: PresentationMedium!
+    daysDuration: Int!
+}
+
+enum RecognitionBasis {
+    RESEARCH
+    SCHOLARSHIP
+    EXTENSION_WORK
+    INSTRUCTION
+}
+
+type Recognition {
+    _id: ID
+    title: String!
+    basis: RecognitionBasis!
+    date: MonthYearDate!
+    sponsor: String!
+}
+
+enum InstructionalMaterialMedium {
+    PRINT
+    MODULE
+    VIDEO
+    SLIDE
+    DIGITAL_FILE
+    AUDIO
+}
+
+enum InstructionalMaterialAudience {
+    STUDENT
+    TEACHER
+}
+
+type InstructionalMaterial {
+    _id: ID
+    title: String!
+    medium: InstructionalMaterialMedium!
+    audience: InstructionalMaterialAudience!
+    usageYear: Int!
+    level: String
+}
+
+type ExtensionWork {
+    _id: ID
+    title: String!
+    roles: [String!]!
+    venue: String!
+}
+
+enum DegreeLevel {
+    ASSOCIATE
+    BACHELOR
+    MASTER
+    DOCTORATE
+}
+
+type Degree {
+    _id: ID
+    title: String!
+    level: DegreeLevel!
+    completionYear: Int!
+}
+
+enum Sex {
+    M
+    F
+}
+
+enum Employment {
+    REGULAR
+    PROFESSOR
+    ADMINISTRATOR
+    PART_TIME
+    ADJUNCT
+    ON_LEAVE
+    TERMINATED
+}
+
+type Faculty {
+    _id: ID!
+    idNumber: String!
+    user: User!
+    sex: Sex!
+    employment: Employment
+    birthDate: String!
+    degrees: [Degree!]!
+    presentations: [Presentation!]!
+    recognitions: [Recognition!]!
+    instructionalMaterials: [InstructionalMaterial!]!
+    extensionWorks: [ExtensionWork!]!
+    teachingSubjects: [ID!]!
+}

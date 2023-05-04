@@ -1,0 +1,95 @@
+input FacultyInput {
+    sex: Sex
+    idNumber: String
+    employment: Employment
+    birthDate: String
+}
+
+input ExtensionWorkInput {
+    title: String
+    roles: [String!]
+    venue: String
+}
+
+input InstructionalMaterialInput {
+    title: String
+    medium: InstructionalMaterialMedium
+    audience: InstructionalMaterialAudience
+    usageYear: Int
+    level: String
+}
+
+input RecognitionInput {
+    title: String
+    basis: RecognitionBasis
+    date: MonthYearDateInput
+    sponsor: String
+}
+
+input PresentationInput {
+    title: String
+    category: PresentationCategory
+    date: MonthYearDateInput
+    sponsor: String
+    venue: String
+    conference: String
+    medium: PresentationMedium
+    daysDuration: Int
+}
+
+input DegreeInput {
+    title: String
+    level: DegreeLevel
+    completionYear: Int
+}
+
+type FacultyMutations {
+    add(newFaculty: FacultyInput!, newUser: UserInput!, temporaryPassword: String!): Faculty!
+    update(_id: ID!, newFaculty: FacultyInput!, newUser: UserInput): Faculty!
+    resetPassword(_id: ID!, newPassword: String!): Boolean!
+}
+
+type PresentationMutations {
+    add(newPresentation: PresentationInput!): Presentation!
+    update(_id: ID!, newPresentation: PresentationInput!): Presentation!
+    remove(_id: ID!): Boolean!
+}
+
+type RecognitionMutations {
+    add(newRecognition: RecognitionInput!): Recognition!
+    update(_id: ID!, newRecognition: RecognitionInput!): Recognition!
+    remove(_id: ID!): Boolean!
+}
+
+type InstructionalMaterialMutations {
+    add(newInstructionalMaterial: InstructionalMaterialInput!): InstructionalMaterial!
+    update(_id: ID!, newInstructionalMaterial: InstructionalMaterialInput!): InstructionalMaterial!
+    remove(_id: ID!): Boolean!
+}
+
+type ExtensionWorkMutations {
+    add(newExtensionWork: ExtensionWorkInput!): ExtensionWork!
+    update(_id: ID!, newExtensionWork: ExtensionWorkInput!): ExtensionWork!
+    remove(_id: ID!): Boolean!
+}
+
+type DegreeMutations {
+    add(newDegree: DegreeInput!): Degree!
+    update(_id: ID!, newDegree: DegreeInput!): Degree!
+    remove(_id: ID!): Boolean!
+}
+
+type TeachingSubjectMutations {
+    set(teachingSubjectsId: [ID!]!): [ID!]!
+    unassign(teachingSubjectId: ID!): Boolean!
+}
+
+extend type Mutation {
+    faculty: FacultyMutations!
+    presentation(facultyId: ID!): PresentationMutations!
+    recognition(facultyId: ID!): RecognitionMutations!
+    instructionalMaterial(facultyId: ID!): InstructionalMaterialMutations!
+    extensionWork(facultyId: ID!): ExtensionWorkMutations!
+    degree(facultyId: ID!): DegreeMutations!
+    teachingSubject(facultyId: ID!): TeachingSubjectMutations!
+}

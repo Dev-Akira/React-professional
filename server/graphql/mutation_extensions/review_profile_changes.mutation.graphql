@@ -1,0 +1,8 @@
+type RequestReviewAction {
+    approve: JSON!
+    reject(reason: String!): Boolean!
+}
+
+extend type Mutation {
+    reviewProfileChangeRequest(_id: ID!): RequestReviewAction!
+}

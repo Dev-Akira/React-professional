@@ -1,0 +1,32 @@
+type DegreeChanges {
+    add(newDegree: DegreeInput!): DegreeChange!
+}
+
+type ExtensionWorkChanges {
+    add(newExtensionWork: ExtensionWorkInput!): ExtensionWorkChange!
+}
+
+type InstructionalMaterialChanges {
+    add(newInstructionalMaterial: InstructionalMaterialInput!): InstructionalMaterialChange!
+}
+
+type RecognitionChanges {
+    add(newRecognition: RecognitionInput!): RecognitionChange!
+}
+
+type PresentationChanges {
+    add(newPresentation: PresentationInput!): PresentationChange!
+}
+
+type RequestChange {
+    degree: DegreeChanges!
+    extensionWork: ExtensionWorkChanges!
+    instructionalMaterial: InstructionalMaterialChanges!
+    recognition: RecognitionChanges!
+    presentation: PresentationChanges!
+    deleteChangeRequest(_id: ID!): Boolean!
+}
+
+extend type Mutation {
+    requestProfileChange: RequestChange!
+}

@@ -1,0 +1,95 @@
+type Subject {
+    _id: ID!
+    code: String!
+    name: String!
+    category: SubjectCategory
+    description: String!
+    faculties: [ID!]!
+}
+
+enum SubjectCategory {
+    PEDAGOGICAL
+    GENERAL
+    SPECIALIZATION
+    ELECTIVE
+    PROFESSIONAL
+}
+
+enum MeetingDay {
+    M_TH
+    T_F
+}
+
+type Class {
+    _id: ID!
+    subject: ID!
+    meetingDays: MeetingDay!
+    meetingHours: String!
+    room: String!
+    enrollmentCap: Int!
+    faculty: ID
+    course: String!
+    section: String!
+}
+
+enum Term {
+    FIRST
+    SECOND
+    THIRD
+}
+
+enum FacultyFeedbackStatus {
+    ACCEPTED
+    REJECTED
+}
+
+type FacultyFeedback {
+    submitted: String!
+    status: FacultyFeedbackStatus!
+    rejectionReason: String
+    isDirty: Boolean!
+}
+
+type FacultyAvailability {
+    M_TH: [String!]
+    T_F: [String!]
+}
+
+type FacultyResponse {
+    faculty: ID!
+    availability: FacultyAvailability
+    feedback: FacultyFeedback
+}
+
+enum TermScheduleStatus {
+    INITIALIZING
+    SCHEDULING
+    FEEDBACK_GATHERING
+    PUBLISHED
+    ARCHIVED
+}
+
+type TermSchedule {
+    _id: ID!
+    startYear: Int!
+    term: Term!
+    facultyPool: [FacultyResponse!]!
+    classes: [Class!]!
+    status: TermScheduleStatus!
+}
+
+type FacultyTermSchedule {
+    _id: ID!
+    status: TermScheduleStatus!
+    startYear: Int!
+    term: Term!
+    classes: [Class!]!
+    involved: Boolean!
+    availability: FacultyAvailability
+    feedback: FacultyFeedback
+}
+
+type MySchedule {
+    current: FacultyTermSchedule
+    archived: [FacultyTermSchedule!]!
+}
